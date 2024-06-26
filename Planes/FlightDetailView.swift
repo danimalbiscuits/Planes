@@ -1,18 +1,21 @@
-//
-//  FlightDetailView.swift
-//  Planes
-//
-//  Created by Daniel Geraghty on 26/06/2024.
-//
-
 import SwiftUI
+import MapKit
 
 struct FlightDetailView: View {
+    let flight: Flight
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Map()
+            Text("Hello")
+            
+        }
     }
 }
 
-#Preview {
-    FlightDetailView()
+struct FlightDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        FlightDetailView(flight: Flight(callsign: "Sample CallSign", icao24: "Sample ICAO24"))
+    }
 }
+

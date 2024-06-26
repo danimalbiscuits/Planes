@@ -1,6 +1,6 @@
 import SwiftUI
 
-// Model
+// Models
 struct Flight: Identifiable {
     let id = UUID()
     let callsign: String
