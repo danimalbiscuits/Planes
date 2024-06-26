@@ -102,4 +102,3 @@ struct AircraftDetails: Decodable {
 }
 
 // Helper struct for decoding any type
-

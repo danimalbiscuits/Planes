@@ -6,22 +6,24 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List(viewModel.flights) { flight in
-                HStack(alignment: .top) {
-                    Image(systemName: "airplane")
-                        .foregroundColor(.blue)
-                        .padding(.trailing, 5)
-                        .symbolEffect(.pulse)
-                    VStack(alignment: .leading) {
-                        if let registeredOwners = flight.RegisteredOwners {
-                            Text("\(registeredOwners)")
-                        }
-                        Text("\(flight.callsign)")
-                        if let manufacturer = flight.Manufacturer, let icaoTypeCode = flight.ICAOTypeCode {
-                            Text("\(manufacturer) - \(icaoTypeCode)")
+                NavigationLink(destination: FlightDetailView(flight: flight)) {
+                    HStack(alignment: .top) {
+                        Image(systemName: "airplane")
+                            .foregroundColor(.blue)
+                            .padding(.trailing, 5)
+                        VStack(alignment: .leading) {
+                            if let registeredOwners = flight.RegisteredOwners {
+                                Text("\(registeredOwners)")
+                            }
+                            Text("\(flight.callsign)")
+                            if let manufacturer = flight.Manufacturer, let icaoTypeCode = flight.ICAOTypeCode {
+                                Text("\(manufacturer) - \(icaoTypeCode)")
+                                    .font(.subheadline)
+                            }
                         }
                     }
+                    .padding(.vertical, 5)
                 }
-                .padding(.vertical, 5)
             }
             .refreshable {
                 viewModel.fetchFlights()
@@ -39,4 +41,3 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
-
