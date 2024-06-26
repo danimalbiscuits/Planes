@@ -11,6 +11,9 @@
 		37417CCF2C2BFAC200061167 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37417CCE2C2BFAC200061167 /* ContentView.swift */; };
 		37417CD12C2BFAC300061167 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37417CD02C2BFAC300061167 /* Assets.xcassets */; };
 		37417CD42C2BFAC300061167 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37417CD32C2BFAC300061167 /* Preview Assets.xcassets */; };
+		37417CDB2C2BFCDC00061167 /* Flight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37417CDA2C2BFCDC00061167 /* Flight.swift */; };
+		37417CDD2C2BFD2300061167 /* FlightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37417CDC2C2BFD2300061167 /* FlightViewModel.swift */; };
+		37417CDF2C2BFD7E00061167 /* AnyDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37417CDE2C2BFD7E00061167 /* AnyDecodable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +22,9 @@
 		37417CCE2C2BFAC200061167 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		37417CD02C2BFAC300061167 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		37417CD32C2BFAC300061167 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		37417CDA2C2BFCDC00061167 /* Flight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flight.swift; sourceTree = "<group>"; };
+		37417CDC2C2BFD2300061167 /* FlightViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightViewModel.swift; sourceTree = "<group>"; };
+		37417CDE2C2BFD7E00061167 /* AnyDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyDecodable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +59,9 @@
 			children = (
 				37417CCC2C2BFAC200061167 /* PlanesApp.swift */,
 				37417CCE2C2BFAC200061167 /* ContentView.swift */,
+				37417CDA2C2BFCDC00061167 /* Flight.swift */,
+				37417CDC2C2BFD2300061167 /* FlightViewModel.swift */,
+				37417CDE2C2BFD7E00061167 /* AnyDecodable.swift */,
 				37417CD02C2BFAC300061167 /* Assets.xcassets */,
 				37417CD22C2BFAC300061167 /* Preview Content */,
 			);
@@ -138,7 +147,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				37417CCF2C2BFAC200061167 /* ContentView.swift in Sources */,
+				37417CDB2C2BFCDC00061167 /* Flight.swift in Sources */,
+				37417CDD2C2BFD2300061167 /* FlightViewModel.swift in Sources */,
 				37417CCD2C2BFAC200061167 /* PlanesApp.swift in Sources */,
+				37417CDF2C2BFD7E00061167 /* AnyDecodable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
