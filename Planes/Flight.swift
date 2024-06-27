@@ -1,4 +1,5 @@
 import Foundation
+
 // Model
 struct Flight: Identifiable {
     let id = UUID()
@@ -7,5 +8,6 @@ struct Flight: Identifiable {
     var ICAOTypeCode: String?
     var Manufacturer: String?
     var RegisteredOwners: String?
+    var longitude: Double?
+    var latitude: Double?
 }
-

@@ -8,46 +8,53 @@ class FlightViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
 
     func fetchFlights() {
-        let urlString = "https://opensky-network.org/api/states/all?lamin=27.741885&lomin=-130.803223&lamax=36.509636&lomax=-115.488281"
-        guard let url = URL(string: urlString) else { return }
+        let urlString = "https://opensky-network.org/api/states/all?lamin=-41.885921&lomin=172.177734&lamax=-36.102376&lomax=179.868164"
+        guard let url = URL(string: urlString) else {
+            print("Invalid URL")
+            return
+        }
 
         URLSession.shared.dataTaskPublisher(for: url)
-            .map(\.data)
+            .tryMap { $0.data }
             .decode(type: OpenSkyResponse.self, decoder: JSONDecoder())
-            .map { response in
-                response.states.compactMap { stateArray in
-                    if let callsign = stateArray[1] as? String,
-                       let icao24 = stateArray[0] as? String,
-                       !callsign.trimmingCharacters(in: .whitespaces).isEmpty {
-                        return Flight(callsign: callsign.trimmingCharacters(in: .whitespaces), icao24: icao24)
-                    }
-                    return nil
+            .catch { _ in Just(OpenSkyResponse(states: [])) }
+            .sink(receiveCompletion: { completion in
+                if case .failure(let error) = completion {
+                    print("Error fetching flights: \(error)")
                 }
-            }
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] flights in
-                self?.flights = flights
-                self?.fetchAircraftDetails()
+            }, receiveValue: { response in
+                let newFlights = response.states.compactMap { state -> Flight? in
+                    guard state.count > 6 else { return nil }
+                    let icao24 = state[0] as? String ?? "Unknown"
+                    let callsign = state[1] as? String ?? "Unknown"
+                    let longitude = state[5] as? Double
+                    let latitude = state[6] as? Double
+                    return Flight(callsign: callsign, icao24: icao24, longitude: longitude, latitude: latitude)
+                }
+                DispatchQueue.main.async {
+                    self.flights = newFlights
+                    self.fetchAircraftDetails()
+                }
             })
             .store(in: &cancellables)
     }
 
-    private func fetchAircraftDetails() {
-        let baseUrl = "https://hexdb.io/api/v1/aircraft/"
-
-        flights.forEach { flight in
-            let urlString = baseUrl + flight.icao24
-            guard let url = URL(string: urlString) else { return }
-
+    func fetchAircraftDetails() {
+        for (index, flight) in flights.enumerated() {
+            let url = URL(string: "https://hexdb.io/api/v1/aircraft/\(flight.icao24)")!
             URLSession.shared.dataTaskPublisher(for: url)
-                .map(\.data)
+                .tryMap { $0.data }
                 .decode(type: AircraftDetails.self, decoder: JSONDecoder())
-                .receive(on: DispatchQueue.main)
-                .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] details in
-                    if let index = self?.flights.firstIndex(where: { $0.id == flight.id }) {
-                        self?.flights[index].ICAOTypeCode = details.ICAOTypeCode
-                        self?.flights[index].Manufacturer = details.Manufacturer
-                        self?.flights[index].RegisteredOwners = details.RegisteredOwners
+                .replaceError(with: AircraftDetails(ICAOTypeCode: "Unknown", Manufacturer: "Unknown", RegisteredOwners: "Unknown"))
+                .sink(receiveCompletion: { completion in
+                    if case .failure(let error) = completion {
+                        print("Error fetching aircraft details: \(error)")
+                    }
+                }, receiveValue: { details in
+                    DispatchQueue.main.async {
+                        self.flights[index].ICAOTypeCode = details.ICAOTypeCode
+                        self.flights[index].Manufacturer = details.Manufacturer
+                        self.flights[index].RegisteredOwners = details.RegisteredOwners
                     }
                 })
                 .store(in: &cancellables)
@@ -92,6 +99,10 @@ struct OpenSkyResponse: Decodable {
         
         self.states = tempStates
     }
+
+    init(states: [[Any]]) {
+        self.states = states
+    }
 }
 
 // Response structure for HexDB API
@@ -103,4 +114,3 @@ struct AircraftDetails: Decodable {
 
 // Helper struct for decoding any type
 struct AnyDecodable: Decodable {}
-

@@ -26,7 +26,7 @@ struct ContentView: View {
             .refreshable {
                 viewModel.fetchFlights()
             }
-            .navigationTitle("LA Flights")
+            .navigationTitle("Flights")
             .onAppear {
                 viewModel.fetchFlights()
             }
