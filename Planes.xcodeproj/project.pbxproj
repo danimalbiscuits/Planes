@@ -8,25 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		37417CCD2C2BFAC200061167 /* PlanesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37417CCC2C2BFAC200061167 /* PlanesApp.swift */; };
-		37417CCF2C2BFAC200061167 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37417CCE2C2BFAC200061167 /* ContentView.swift */; };
 		37417CD12C2BFAC300061167 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37417CD02C2BFAC300061167 /* Assets.xcassets */; };
 		37417CD42C2BFAC300061167 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37417CD32C2BFAC300061167 /* Preview Assets.xcassets */; };
-		37417CDB2C2BFCDC00061167 /* Flight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37417CDA2C2BFCDC00061167 /* Flight.swift */; };
-		37417CDD2C2BFD2300061167 /* FlightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37417CDC2C2BFD2300061167 /* FlightViewModel.swift */; };
-		37417CDF2C2BFD7E00061167 /* AnyDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37417CDE2C2BFD7E00061167 /* AnyDecodable.swift */; };
-		37417CE92C2C11E000061167 /* FlightDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37417CE82C2C11E000061167 /* FlightDetailView.swift */; };
+		375AB9872C2D4E86004A62F3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AB9862C2D4E86004A62F3 /* ContentView.swift */; };
+		375AB9892C2D5117004A62F3 /* Flight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AB9882C2D5117004A62F3 /* Flight.swift */; };
+		375AB98B2C2D5136004A62F3 /* FlightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AB98A2C2D5136004A62F3 /* FlightViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		37417CC92C2BFAC200061167 /* Planes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Planes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37417CCC2C2BFAC200061167 /* PlanesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanesApp.swift; sourceTree = "<group>"; };
-		37417CCE2C2BFAC200061167 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		37417CD02C2BFAC300061167 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		37417CD32C2BFAC300061167 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		37417CDA2C2BFCDC00061167 /* Flight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flight.swift; sourceTree = "<group>"; };
-		37417CDC2C2BFD2300061167 /* FlightViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightViewModel.swift; sourceTree = "<group>"; };
-		37417CDE2C2BFD7E00061167 /* AnyDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyDecodable.swift; sourceTree = "<group>"; };
-		37417CE82C2C11E000061167 /* FlightDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightDetailView.swift; sourceTree = "<group>"; };
+		375AB9862C2D4E86004A62F3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		375AB9882C2D5117004A62F3 /* Flight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flight.swift; sourceTree = "<group>"; };
+		375AB98A2C2D5136004A62F3 /* FlightViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,11 +56,9 @@
 			isa = PBXGroup;
 			children = (
 				37417CCC2C2BFAC200061167 /* PlanesApp.swift */,
-				37417CCE2C2BFAC200061167 /* ContentView.swift */,
-				37417CDA2C2BFCDC00061167 /* Flight.swift */,
-				37417CDC2C2BFD2300061167 /* FlightViewModel.swift */,
-				37417CDE2C2BFD7E00061167 /* AnyDecodable.swift */,
-				37417CE82C2C11E000061167 /* FlightDetailView.swift */,
+				375AB9862C2D4E86004A62F3 /* ContentView.swift */,
+				375AB9882C2D5117004A62F3 /* Flight.swift */,
+				375AB98A2C2D5136004A62F3 /* FlightViewModel.swift */,
 				37417CD02C2BFAC300061167 /* Assets.xcassets */,
 				37417CD22C2BFAC300061167 /* Preview Content */,
 			);
@@ -149,12 +143,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37417CCF2C2BFAC200061167 /* ContentView.swift in Sources */,
-				37417CDB2C2BFCDC00061167 /* Flight.swift in Sources */,
-				37417CDD2C2BFD2300061167 /* FlightViewModel.swift in Sources */,
+				375AB98B2C2D5136004A62F3 /* FlightViewModel.swift in Sources */,
+				375AB9872C2D4E86004A62F3 /* ContentView.swift in Sources */,
+				375AB9892C2D5117004A62F3 /* Flight.swift in Sources */,
 				37417CCD2C2BFAC200061167 /* PlanesApp.swift in Sources */,
-				37417CDF2C2BFD7E00061167 /* AnyDecodable.swift in Sources */,
-				37417CE92C2C11E000061167 /* FlightDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,6 +1,5 @@
-import SwiftUI
-
-// Models
+import Foundation
+// Model
 struct Flight: Identifiable {
     let id = UUID()
     let callsign: String
@@ -9,3 +8,4 @@ struct Flight: Identifiable {
     var Manufacturer: String?
     var RegisteredOwners: String?
 }
+

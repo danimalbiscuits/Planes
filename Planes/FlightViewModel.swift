@@ -8,7 +8,7 @@ class FlightViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
 
     func fetchFlights() {
-        let urlString = "https://opensky-network.org/api/states/all?lamin=-41.296381&lomin=174.388733&lamax=-40.737893&lomax=175.035553"
+        let urlString = "https://opensky-network.org/api/states/all?lamin=27.741885&lomin=-130.803223&lamax=36.509636&lomax=-115.488281"
         guard let url = URL(string: urlString) else { return }
 
         URLSession.shared.dataTaskPublisher(for: url)
@@ -102,3 +102,5 @@ struct AircraftDetails: Decodable {
 }
 
 // Helper struct for decoding any type
+struct AnyDecodable: Decodable {}
+
