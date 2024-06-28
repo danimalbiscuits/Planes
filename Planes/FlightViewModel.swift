@@ -1,7 +1,6 @@
 import SwiftUI
 import Combine
 
-// ViewModel
 class FlightViewModel: ObservableObject {
     @Published var flights: [Flight] = []
 
@@ -23,13 +22,18 @@ class FlightViewModel: ObservableObject {
                     print("Error fetching flights: \(error)")
                 }
             }, receiveValue: { response in
+                print("API Response: \(response)")
+
                 let newFlights = response.states.compactMap { state -> Flight? in
-                    guard state.count > 6 else { return nil }
+                    guard state.count > 13 else { return nil }
                     let icao24 = state[0] as? String ?? "Unknown"
                     let callsign = state[1] as? String ?? "Unknown"
                     let longitude = state[5] as? Double
                     let latitude = state[6] as? Double
-                    return Flight(callsign: callsign, icao24: icao24, longitude: longitude, latitude: latitude)
+                    let velocity = state[9] as? Double
+                    let geo_altitude = state[12] as? Double
+
+                    return Flight(callsign: callsign, icao24: icao24, longitude: longitude, latitude: latitude, velocity: velocity != nil ? Float(velocity!) : nil, geo_altitude: geo_altitude != nil ? Float(geo_altitude!) : nil)
                 }
                 DispatchQueue.main.async {
                     self.flights = newFlights
@@ -90,7 +94,6 @@ struct OpenSkyResponse: Decodable {
                 } else if let boolValue = try? stateArrayContainer.decode(Bool.self) {
                     stateArray.append(boolValue)
                 } else {
-                    // Handle other types if needed
                     _ = try? stateArrayContainer.decode(AnyDecodable.self)
                 }
             }

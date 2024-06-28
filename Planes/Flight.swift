@@ -10,4 +10,6 @@ struct Flight: Identifiable {
     var RegisteredOwners: String?
     var longitude: Double?
     var latitude: Double?
+    var velocity: Float?
+    var geo_altitude: Float?
 }
