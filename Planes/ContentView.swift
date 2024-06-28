@@ -18,6 +18,7 @@ struct ContentView: View {
                         Text("\(flight.callsign)")
                         if let manufacturer = flight.Manufacturer, let icaoTypeCode = flight.ICAOTypeCode {
                             Text("\(manufacturer) - \(icaoTypeCode)")
+                                .font(.subheadline)
                         }
                     }
                 }
