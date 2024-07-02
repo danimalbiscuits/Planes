@@ -30,9 +30,6 @@ struct ContentView: View {
                 viewModel.fetchFlights()
             }
             .navigationTitle("Flights")
-            .onAppear {
-                viewModel.fetchFlights()
-            }
         }
     }
 }

@@ -3,10 +3,10 @@ import MapKit
 
 struct FlightDetailView: View {
     var flight: Flight
-    @State private var position = MapCameraPosition.region(
+    @State private var cameraPosition = MapCameraPosition.region(
         MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0),
-            span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+            span: MKCoordinateSpan(latitudeDelta: 0.4, longitudeDelta: 0.4)
         )
     )
 
@@ -35,15 +35,15 @@ struct FlightDetailView: View {
             }
 
             if let latitude = flight.latitude, let longitude = flight.longitude {
-                Map(position: $position) {
+                Map(position: $cameraPosition) {
                     Marker(flight.callsign, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
                 }
                 .frame(height: 200)
                 .onAppear {
-                    position = MapCameraPosition.region(
+                    cameraPosition = .region(
                         MKCoordinateRegion(
                             center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
-                            span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+                            span: MKCoordinateSpan(latitudeDelta: 1.0, longitudeDelta: 1.0)
                         )
                     )
                 }
@@ -57,14 +57,11 @@ struct FlightDetailView: View {
         }
         .padding()
         .navigationTitle("Flight Details")
-        .onAppear {
-            // Fetch data if necessary when the detail view appears
-        }
     }
 }
 
 struct FlightDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        FlightDetailView(flight: Flight(callsign: "Example", icao24: "abc123", ICAOTypeCode: "A320", Manufacturer: "Airbus", RegisteredOwners: "Airline", longitude: 174.898370, latitude: -41.109540, velocity: 250.0, geo_altitude: 10000.0))
+        FlightDetailView(flight: Flight(callsign: "Example", icao24: "abc123", ICAOTypeCode: "A320", Manufacturer: "Airbus", RegisteredOwners: "Airline", longitude: -122.4194, latitude: 37.7749, velocity: 250.0, geo_altitude: 10000.0))
     }
 }
