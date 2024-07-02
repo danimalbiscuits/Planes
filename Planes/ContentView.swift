@@ -5,7 +5,7 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            List(viewModel.flights) { flight in
+            List(viewModel.sortedFlights) { flight in
                 NavigationLink(destination: FlightDetailView(flight: flight)) {
                     HStack(alignment: .top) {
                         Image(systemName: "airplane")

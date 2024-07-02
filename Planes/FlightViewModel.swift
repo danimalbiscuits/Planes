@@ -7,15 +7,12 @@ class FlightViewModel: ObservableObject {
     @Published var sortedFlights: [Flight] = []
 
     private var cancellables = Set<AnyCancellable>()
-    var locationManager = LocationManager()
+    
+    // Fixed coordinates
+    let fixedLocation = CLLocation(latitude: -41.109540, longitude: 174.898370)
 
     init() {
-        locationManager.$location
-            .sink { [weak self] location in
-                print("Location updated: \(String(describing: location))")
-                self?.sortFlightsByDistance()
-            }
-            .store(in: &cancellables)
+        fetchFlights()
     }
 
     func fetchFlights() {
@@ -80,15 +77,10 @@ class FlightViewModel: ObservableObject {
     }
 
     func sortFlightsByDistance() {
-        guard let userLocation = locationManager.location else {
-            print("User location not available")
-            return
-        }
-
         self.sortedFlights = self.flights.sorted {
             let location1 = CLLocation(latitude: $0.latitude ?? 0.0, longitude: $0.longitude ?? 0.0)
             let location2 = CLLocation(latitude: $1.latitude ?? 0.0, longitude: $1.longitude ?? 0.0)
-            return location1.distance(from: userLocation) < location2.distance(from: userLocation)
+            return location1.distance(from: fixedLocation) < location2.distance(from: fixedLocation)
         }
         print("Sorted flights count: \(self.sortedFlights.count)")
     }

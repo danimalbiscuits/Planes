@@ -14,7 +14,6 @@
 		375AB9892C2D5117004A62F3 /* Flight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AB9882C2D5117004A62F3 /* Flight.swift */; };
 		375AB98B2C2D5136004A62F3 /* FlightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AB98A2C2D5136004A62F3 /* FlightViewModel.swift */; };
 		375ADAB22C2EAA2F000A1E10 /* FlightDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375ADAB12C2EAA2F000A1E10 /* FlightDetailView.swift */; };
-		37B9BA242C33E73B000520F3 /* LocationManager .swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B9BA232C33E73B000520F3 /* LocationManager .swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,7 +25,7 @@
 		375AB9882C2D5117004A62F3 /* Flight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flight.swift; sourceTree = "<group>"; };
 		375AB98A2C2D5136004A62F3 /* FlightViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightViewModel.swift; sourceTree = "<group>"; };
 		375ADAB12C2EAA2F000A1E10 /* FlightDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightDetailView.swift; sourceTree = "<group>"; };
-		37B9BA232C33E73B000520F3 /* LocationManager .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocationManager .swift"; sourceTree = "<group>"; };
+		37B9BA252C33EB30000520F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +63,7 @@
 				375AB9882C2D5117004A62F3 /* Flight.swift */,
 				375AB98A2C2D5136004A62F3 /* FlightViewModel.swift */,
 				375ADAB12C2EAA2F000A1E10 /* FlightDetailView.swift */,
-				37B9BA232C33E73B000520F3 /* LocationManager .swift */,
+				37B9BA252C33EB30000520F3 /* Info.plist */,
 				37417CD02C2BFAC300061167 /* Assets.xcassets */,
 				37417CD22C2BFAC300061167 /* Preview Content */,
 			);
@@ -150,7 +149,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				375AB98B2C2D5136004A62F3 /* FlightViewModel.swift in Sources */,
-				37B9BA242C33E73B000520F3 /* LocationManager .swift in Sources */,
 				375AB9872C2D4E86004A62F3 /* ContentView.swift in Sources */,
 				375AB9892C2D5117004A62F3 /* Flight.swift in Sources */,
 				375ADAB22C2EAA2F000A1E10 /* FlightDetailView.swift in Sources */,
