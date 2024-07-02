@@ -1,10 +1,22 @@
 import SwiftUI
 import Combine
+import CoreLocation
 
 class FlightViewModel: ObservableObject {
     @Published var flights: [Flight] = []
+    @Published var sortedFlights: [Flight] = []
 
     private var cancellables = Set<AnyCancellable>()
+    var locationManager = LocationManager()
+
+    init() {
+        locationManager.$location
+            .sink { [weak self] location in
+                print("Location updated: \(String(describing: location))")
+                self?.sortFlightsByDistance()
+            }
+            .store(in: &cancellables)
+    }
 
     func fetchFlights() {
         let urlString = "https://opensky-network.org/api/states/all?lamin=-41.885921&lomin=172.177734&lamax=-36.102376&lomax=179.868164"
@@ -37,6 +49,7 @@ class FlightViewModel: ObservableObject {
                 }
                 DispatchQueue.main.async {
                     self.flights = newFlights
+                    print("Fetched flights: \(self.flights.count)")
                     self.fetchAircraftDetails()
                 }
             })
@@ -59,10 +72,25 @@ class FlightViewModel: ObservableObject {
                         self.flights[index].ICAOTypeCode = details.ICAOTypeCode
                         self.flights[index].Manufacturer = details.Manufacturer
                         self.flights[index].RegisteredOwners = details.RegisteredOwners
+                        self.sortFlightsByDistance()
                     }
                 })
                 .store(in: &cancellables)
         }
+    }
+
+    func sortFlightsByDistance() {
+        guard let userLocation = locationManager.location else {
+            print("User location not available")
+            return
+        }
+
+        self.sortedFlights = self.flights.sorted {
+            let location1 = CLLocation(latitude: $0.latitude ?? 0.0, longitude: $0.longitude ?? 0.0)
+            let location2 = CLLocation(latitude: $1.latitude ?? 0.0, longitude: $1.longitude ?? 0.0)
+            return location1.distance(from: userLocation) < location2.distance(from: userLocation)
+        }
+        print("Sorted flights count: \(self.sortedFlights.count)")
     }
 }
 
