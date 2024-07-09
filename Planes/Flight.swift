@@ -1,6 +1,5 @@
 import Foundation
 
-// Model
 struct Flight: Identifiable {
     let id = UUID()
     let callsign: String
@@ -12,4 +11,5 @@ struct Flight: Identifiable {
     var latitude: Double?
     var velocity: Float?
     var geo_altitude: Float?
+    var true_track: Float? // Added true_track field
 }

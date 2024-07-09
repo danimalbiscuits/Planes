@@ -41,9 +41,10 @@ class FlightViewModel: ObservableObject {
                     let longitude = state[5] as? Double
                     let latitude = state[6] as? Double
                     let velocity = state[9] as? Double
+                    let true_track = state[10] as? Double // Parsing true_track
                     let geo_altitude = state[12] as? Double
 
-                    return Flight(callsign: callsign, icao24: icao24, longitude: longitude, latitude: latitude, velocity: velocity != nil ? Float(velocity!) : nil, geo_altitude: geo_altitude != nil ? Float(geo_altitude!) : nil)
+                    return Flight(callsign: callsign, icao24: icao24, longitude: longitude, latitude: latitude, velocity: velocity != nil ? Float(velocity!) : nil, geo_altitude: geo_altitude != nil ? Float(geo_altitude!) : nil, true_track: true_track != nil ? Float(true_track!) : nil)
                 }
                 DispatchQueue.main.async {
                     self.flights = newFlights

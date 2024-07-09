@@ -19,6 +19,7 @@ struct ContentView: View {
                                 .foregroundColor(.blue)
                                 .padding(.bottom, 0)
                                 .symbolEffect(.pulse)
+                                .rotationEffect(.degrees(Double((annotation.flight.true_track ?? 0)) - 90)) // Rotate the plane based on true_track with adjustment
                             Text(annotation.title ?? "Unknown")
                                 .font(.caption2)
                         }
@@ -26,7 +27,7 @@ struct ContentView: View {
                 }
             }
             .ignoresSafeArea(edges: .all) // Ignore the safe area
-            .navigationTitle("Flights")
+            .navigationTitle("")
             .onAppear {
                 viewModel.fetchFlights()
             }
