@@ -24,9 +24,19 @@ class FlightViewModel: ObservableObject {
         }
 
         URLSession.shared.dataTaskPublisher(for: url)
-            .tryMap { $0.data }
+            .tryMap { (data, response) -> Data in
+                if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 429 {
+                    throw URLError(.badServerResponse)
+                }
+                return data
+            }
             .decode(type: OpenSkyResponse.self, decoder: JSONDecoder())
-            .catch { _ in Just(OpenSkyResponse(states: [])) }
+            .catch { error -> Just<OpenSkyResponse> in
+                if (error as? URLError)?.code == .badServerResponse {
+                    self.addDummyFlight()
+                }
+                return Just(OpenSkyResponse(states: []))
+            }
             .sink(receiveCompletion: { completion in
                 if case .failure(let error) = completion {
                     print("Error fetching flights: \(error)")
@@ -41,7 +51,7 @@ class FlightViewModel: ObservableObject {
                     let longitude = state[5] as? Double
                     let latitude = state[6] as? Double
                     let velocity = state[9] as? Double
-                    let true_track = state[10] as? Double // Parsing true_track
+                    let true_track = state[10] as? Double
                     let geo_altitude = state[12] as? Double
 
                     return Flight(callsign: callsign, icao24: icao24, longitude: longitude, latitude: latitude, velocity: velocity != nil ? Float(velocity!) : nil, geo_altitude: geo_altitude != nil ? Float(geo_altitude!) : nil, true_track: true_track != nil ? Float(true_track!) : nil)
@@ -98,6 +108,12 @@ class FlightViewModel: ObservableObject {
                 flight: flight
             )
         }
+    }
+
+    func addDummyFlight() {
+        let dummyFlight = Flight(callsign: "Dummy", icao24: "dummy123", ICAOTypeCode: "A320", Manufacturer: "Airbus", RegisteredOwners: "Airline", longitude: fixedLocation.coordinate.longitude, latitude: fixedLocation.coordinate.latitude, velocity: 250.0, geo_altitude: 10000.0, true_track: 90.0)
+        self.flights = [dummyFlight]
+        self.updateAnnotations()
     }
 }
 

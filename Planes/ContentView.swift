@@ -10,24 +10,20 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: false, userTrackingMode: nil, annotationItems: viewModel.annotations) { annotation in
+            Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: false, annotationItems: viewModel.annotations) { annotation in
                 MapAnnotation(coordinate: annotation.coordinate) {
                     NavigationLink(destination: FlightDetailView(flight: annotation.flight)) {
-                        VStack {
-                            Image(systemName: "airplane")
-                                .font(.system(size: 25)) // Increase the size of the plane icon
-                                .foregroundColor(.blue)
-                                .padding(.bottom, 0)
-                                .symbolEffect(.pulse)
-                                .rotationEffect(.degrees(Double((annotation.flight.true_track ?? 0)) - 90)) // Rotate the plane based on true_track with adjustment
-                            Text(annotation.title ?? "Unknown")
-                                .font(.caption2)
-                        }
+                        Image(systemName: "airplane")
+                            .font(.system(size: 25)) // Increase the size of the plane icon
+                            .foregroundColor(.blue)
+                            .padding(.bottom, 0)
+                            .symbolEffect(.pulse)
+                            .rotationEffect(.degrees(Double((annotation.flight.true_track ?? 0)) - 90)) // Rotate the plane based on true_track with adjustment
                     }
                 }
             }
             .ignoresSafeArea(edges: .all) // Ignore the safe area
-            .navigationTitle("")
+            .navigationTitle("Flights")
             .onAppear {
                 viewModel.fetchFlights()
             }
