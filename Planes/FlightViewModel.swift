@@ -5,6 +5,7 @@ import CoreLocation
 class FlightViewModel: ObservableObject {
     @Published var flights: [Flight] = []
     @Published var sortedFlights: [Flight] = []
+    @Published var annotations: [FlightAnnotation] = []
 
     private var cancellables = Set<AnyCancellable>()
     
@@ -70,6 +71,7 @@ class FlightViewModel: ObservableObject {
                         self.flights[index].Manufacturer = details.Manufacturer
                         self.flights[index].RegisteredOwners = details.RegisteredOwners
                         self.sortFlightsByDistance()
+                        self.updateAnnotations()
                     }
                 })
                 .store(in: &cancellables)
@@ -83,6 +85,18 @@ class FlightViewModel: ObservableObject {
             return location1.distance(from: fixedLocation) < location2.distance(from: fixedLocation)
         }
         print("Sorted flights count: \(self.sortedFlights.count)")
+    }
+
+    func updateAnnotations() {
+        self.annotations = self.sortedFlights.compactMap { flight in
+            guard let latitude = flight.latitude, let longitude = flight.longitude else { return nil }
+            return FlightAnnotation(
+                coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
+                title: flight.callsign,
+                subtitle: flight.icao24,
+                flight: flight
+            )
+        }
     }
 }
 

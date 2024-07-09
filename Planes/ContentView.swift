@@ -1,35 +1,38 @@
 import SwiftUI
+import MapKit
 
 struct ContentView: View {
     @StateObject private var viewModel = FlightViewModel()
+    @State private var region = MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: -41.109540, longitude: 174.898370),
+        span: MKCoordinateSpan(latitudeDelta: 5.0, longitudeDelta: 5.0)
+    )
 
     var body: some View {
         NavigationView {
-            List(viewModel.sortedFlights) { flight in
-                NavigationLink(destination: FlightDetailView(flight: flight)) {
-                    HStack(alignment: .top) {
-                        Image(systemName: "airplane")
-                            .foregroundColor(.blue)
-                            .padding(.trailing, 5)
-                            .symbolEffect(.pulse)
-                        VStack(alignment: .leading) {
-                            if let registeredOwners = flight.RegisteredOwners {
-                                Text("\(registeredOwners)")
-                            }
-                            Text("\(flight.callsign)")
-                            if let manufacturer = flight.Manufacturer, let icaoTypeCode = flight.ICAOTypeCode {
-                                Text("\(manufacturer) - \(icaoTypeCode)")
-                                    .font(.subheadline)
-                            }
+            Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: false, userTrackingMode: nil, annotationItems: viewModel.annotations) { annotation in
+                MapAnnotation(coordinate: annotation.coordinate) {
+                    NavigationLink(destination: FlightDetailView(flight: annotation.flight)) {
+                        VStack {
+                            Image(systemName: "airplane")
+                                .font(.system(size: 25)) // Increase the size of the plane icon
+                                .foregroundColor(.blue)
+                                .padding(.bottom, 0)
+                                .symbolEffect(.pulse)
+                            Text(annotation.title ?? "Unknown")
+                                .font(.caption2)
                         }
                     }
-                    .padding(.vertical, 5)
                 }
+            }
+            .ignoresSafeArea(edges: .all) // Ignore the safe area
+            .navigationTitle("Flights")
+            .onAppear {
+                viewModel.fetchFlights()
             }
             .refreshable {
                 viewModel.fetchFlights()
             }
-            .navigationTitle("Flights")
         }
     }
 }

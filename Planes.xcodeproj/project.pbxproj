@@ -14,6 +14,7 @@
 		375AB9892C2D5117004A62F3 /* Flight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AB9882C2D5117004A62F3 /* Flight.swift */; };
 		375AB98B2C2D5136004A62F3 /* FlightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AB98A2C2D5136004A62F3 /* FlightViewModel.swift */; };
 		375ADAB22C2EAA2F000A1E10 /* FlightDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375ADAB12C2EAA2F000A1E10 /* FlightDetailView.swift */; };
+		3765FCB82C3D204200AC27B3 /* FlightAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3765FCB72C3D204200AC27B3 /* FlightAnnotation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		375AB9882C2D5117004A62F3 /* Flight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flight.swift; sourceTree = "<group>"; };
 		375AB98A2C2D5136004A62F3 /* FlightViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightViewModel.swift; sourceTree = "<group>"; };
 		375ADAB12C2EAA2F000A1E10 /* FlightDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightDetailView.swift; sourceTree = "<group>"; };
+		3765FCB72C3D204200AC27B3 /* FlightAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightAnnotation.swift; sourceTree = "<group>"; };
 		37B9BA252C33EB30000520F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,6 +65,7 @@
 				375AB9882C2D5117004A62F3 /* Flight.swift */,
 				375AB98A2C2D5136004A62F3 /* FlightViewModel.swift */,
 				375ADAB12C2EAA2F000A1E10 /* FlightDetailView.swift */,
+				3765FCB72C3D204200AC27B3 /* FlightAnnotation.swift */,
 				37B9BA252C33EB30000520F3 /* Info.plist */,
 				37417CD02C2BFAC300061167 /* Assets.xcassets */,
 				37417CD22C2BFAC300061167 /* Preview Content */,
@@ -152,6 +155,7 @@
 				375AB9872C2D4E86004A62F3 /* ContentView.swift in Sources */,
 				375AB9892C2D5117004A62F3 /* Flight.swift in Sources */,
 				375ADAB22C2EAA2F000A1E10 /* FlightDetailView.swift in Sources */,
+				3765FCB82C3D204200AC27B3 /* FlightAnnotation.swift in Sources */,
 				37417CCD2C2BFAC200061167 /* PlanesApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
