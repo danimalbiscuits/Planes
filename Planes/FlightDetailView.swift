@@ -11,15 +11,29 @@ struct FlightDetailView: View {
     )
 
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("\(flight.callsign) \(flight.Manufacturer ?? "Unknown") - \(flight.ICAOTypeCode ?? "Unknown")")
-                .font(.title)
-                .fontWeight(.bold)
-                .padding(.bottom, 10)
-
+        VStack {
+            VStack {
+                Text("\(flight.callsign)")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .padding(.bottom, 1)
+                
+                Text("\(flight.Manufacturer ?? "Unknown") - \(flight.ICAOTypeCode ?? "Unknown")")
+                    .font(.title2)
+                    .padding(.bottom, 10)
+            }
+            .frame(maxWidth: .infinity) // Center align horizontally
+            
             if let latitude = flight.latitude, let longitude = flight.longitude {
                 Map(position: $cameraPosition) {
-                    Marker(flight.callsign, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+                    Annotation("", coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude)) {
+                        VStack {
+                            Image(systemName: "airplane")
+                                .font(.system(size: 30))
+                                .foregroundColor(.blue)
+                                .rotationEffect(.degrees(Double((flight.true_track ?? 0)) - 90)) // Rotate the plane based on true_track
+                        }
+                    }
                 }
                 .ignoresSafeArea(edges: .horizontal) // Ignore horizontal safe area
                 .frame(width: 380, height: 200)
@@ -27,7 +41,7 @@ struct FlightDetailView: View {
                     cameraPosition = .region(
                         MKCoordinateRegion(
                             center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
-                            span: MKCoordinateSpan(latitudeDelta: 1.0, longitudeDelta: 1.0)
+                            span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2) // Zoomed in
                         )
                     )
                 }
@@ -37,31 +51,44 @@ struct FlightDetailView: View {
                     .padding(.bottom, 5)
             }
 
-            if let velocity = flight.velocity {
-                let velocityKmH = round(velocity * 3.6)
-                Text("Velocity: \(Int(velocityKmH)) km/h")
-                    .padding(.bottom, 5)
-            } else {
-                Text("Velocity: Unknown")
-                    .padding(.bottom, 5)
-            }
+            HStack {
+                Spacer()
+                VStack(alignment: .center) {
+                    Text("Speed:")
+                        .fontWeight(.bold)
+                    if let velocity = flight.velocity {
+                        let velocityKmH = round(velocity * 3.6)
+                        Text("\(Int(velocityKmH)) km/h")
+                            .padding(.bottom, 5)
+                    } else {
+                        Text("Unknown")
+                            .padding(.bottom, 5)
+                    }
+                }
 
-            if let geoAltitude = flight.geo_altitude {
-                let roundedGeoAltitude = round(geoAltitude)
-                Text("Geo Altitude: \(Int(roundedGeoAltitude)) m")
-                    .padding(.bottom, 5)
-            } else {
-                Text("Geo Altitude: Unknown")
-                    .padding(.bottom, 5)
-            }
+                Spacer()
 
-            if let trueTrack = flight.true_track {
-                Text("True Track: \(trueTrack)°")
-                    .padding(.bottom, 5)
-            } else {
-                Text("True Track: Unknown")
+                VStack(alignment: .center) {
+                    Text("Altitude:")
+                        .fontWeight(.bold)
+                    if let geoAltitude = flight.geo_altitude {
+                        let roundedGeoAltitude = round(geoAltitude)
+                        Text("\(Int(roundedGeoAltitude)) m")
+                            .padding(.bottom, 5)
+                    } else {
+                        Text("Unknown")
+                            .padding(.bottom, 5)
+                    }
+                }
+                Spacer()
+            }
+            
+            VStack(alignment: .center) {
+                Text(flight.RegisteredOwners ?? "Unknown")
+                    .fontWeight(.bold)
                     .padding(.bottom, 5)
             }
+            .frame(maxWidth: .infinity) // Center align horizontally
 
             Spacer()
         }

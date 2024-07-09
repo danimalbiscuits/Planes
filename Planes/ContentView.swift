@@ -23,7 +23,7 @@ struct ContentView: View {
                 }
             }
             .ignoresSafeArea(edges: .all) // Ignore the safe area
-            .navigationTitle("Flights")
+            .navigationTitle("")
             .onAppear {
                 viewModel.fetchFlights()
             }
